@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 
-/* ─── Icons ─────────────────────────────────────────── */
 const DesignIcon = () => (
   <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
     <path d="M12 2l3.5 7 7.5 1-5.5 5.3 1.3 7.7L12 19l-6.8 4 1.3-7.7L1 10l7.5-1L12 2z" />
@@ -14,7 +13,6 @@ const CheckIcon = () => (
   </svg>
 );
 
-/* ─── UI/UX SERVICES ───────────────────────────────── */
 const services = [
   {
     title: "UI Design",

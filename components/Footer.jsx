@@ -1,8 +1,9 @@
+"use client";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-blue-900/15 bg-[#060a14]">
+    <footer style={{ background: "#060e1a", borderTop: "1px solid rgba(1,99,152,0.15)" }}>
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
 
         {/* GRID */}
@@ -10,8 +11,18 @@ export default function Footer() {
 
           {/* BRAND */}
           <div>
-            <div className="text-[22px] font-extrabold text-slate-100 mb-4 tracking-tight">
-              Webnify<span className="text-blue-500">Solutions</span>
+            <div className="flex items-center gap-2.5 mb-4">
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center"
+                style={{ background: "#016398" }}
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <div className="text-[20px] font-extrabold text-white tracking-tight">
+                Webnify<span style={{ color: "#016398" }}>Solutions</span>
+              </div>
             </div>
 
             <p className="text-sm text-slate-500 leading-relaxed mb-6">
@@ -20,7 +31,10 @@ export default function Footer() {
             </p>
 
             {/* Newsletter */}
-            <div className="bg-blue-900/10 border border-blue-900/20 rounded-xl p-4 mb-6">
+            <div
+              className="rounded-xl p-4 mb-6"
+              style={{ background: "rgba(1,99,152,0.08)", border: "1px solid rgba(1,99,152,0.2)" }}
+            >
               <p className="text-xs text-slate-400 font-medium mb-3">
                 📬 Get updates in your inbox
               </p>
@@ -28,13 +42,19 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="flex-1 bg-[#080c18] border border-blue-900/25 rounded-lg
-                  px-3 py-2 text-xs text-slate-300 placeholder-slate-600 outline-none
-                  focus:border-blue-600/60 transition-colors"
+                  className="flex-1 rounded-lg px-3 py-2 text-xs text-slate-300 placeholder-slate-600 outline-none transition-colors"
+                  style={{
+                    background: "#060e1a",
+                    border: "1px solid rgba(1,99,152,0.25)",
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = "rgba(1,99,152,0.6)"}
+                  onBlur={(e) => e.target.style.borderColor = "rgba(1,99,152,0.25)"}
                 />
                 <button
-                  className="bg-blue-600 hover:bg-blue-500 text-white text-xs
-                  font-semibold px-3 py-2 rounded-lg transition-colors"
+                  className="text-white text-xs font-semibold px-3 py-2 rounded-lg transition-all hover:-translate-y-0.5"
+                  style={{ background: "#016398" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#0284c7"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#016398"}
                 >
                   Join
                 </button>
@@ -43,16 +63,35 @@ export default function Footer() {
 
             {/* Socials */}
             <div className="flex gap-2">
-              {["F", "In", "Li", "Tw", "Yt"].map((s) => (
+              {[
+                { label: "F", title: "Facebook" },
+                { label: "In", title: "Instagram" },
+                { label: "Li", title: "LinkedIn" },
+                { label: "Tw", title: "Twitter" },
+                { label: "Yt", title: "YouTube" },
+              ].map((s) => (
                 <a
-                  key={s}
+                  key={s.label}
                   href="#"
-                  className="w-9 h-9 flex items-center justify-center rounded-lg
-                  bg-blue-900/10 border border-blue-900/20 text-slate-500
-                  hover:text-blue-400 hover:border-blue-600/35 text-xs font-bold
-                  transition-all duration-200"
+                  title={s.title}
+                  className="w-9 h-9 flex items-center justify-center rounded-lg text-xs font-bold transition-all duration-200"
+                  style={{
+                    background: "rgba(1,99,152,0.08)",
+                    border: "1px solid rgba(1,99,152,0.18)",
+                    color: "rgba(255,255,255,0.4)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#016398";
+                    e.currentTarget.style.color = "white";
+                    e.currentTarget.style.borderColor = "#016398";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(1,99,152,0.08)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                    e.currentTarget.style.borderColor = "rgba(1,99,152,0.18)";
+                  }}
                 >
-                  {s}
+                  {s.label}
                 </a>
               ))}
             </div>
@@ -60,8 +99,10 @@ export default function Footer() {
 
           {/* SERVICES */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[2.5px] uppercase
-              text-slate-300 mb-5 pb-3 border-b-2 border-blue-600/40">
+            <h4
+              className="text-[11px] font-bold tracking-[2.5px] uppercase mb-5 pb-3"
+              style={{ color: "#7dd3fc", borderBottom: "2px solid rgba(1,99,152,0.5)" }}
+            >
               Services
             </h4>
             <ul className="space-y-3">
@@ -75,12 +116,20 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-sm text-slate-500 hover:text-blue-400
-                    flex items-center gap-2.5 group transition-all duration-200"
+                    className="text-sm flex items-center gap-2.5 group transition-all duration-200"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#7dd3fc";
+                      e.currentTarget.querySelector("span").style.background = "#016398";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                      e.currentTarget.querySelector("span").style.background = "rgba(1,99,152,0.3)";
+                    }}
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-blue-900
-                      group-hover:bg-blue-500 flex-shrink-0 transition-colors"
+                      className="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"
+                      style={{ background: "rgba(1,99,152,0.3)" }}
                     />
                     {item.label}
                   </Link>
@@ -91,8 +140,10 @@ export default function Footer() {
 
           {/* QUICK LINKS */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[2.5px] uppercase
-              text-slate-300 mb-5 pb-3 border-b-2 border-blue-600/40">
+            <h4
+              className="text-[11px] font-bold tracking-[2.5px] uppercase mb-5 pb-3"
+              style={{ color: "#7dd3fc", borderBottom: "2px solid rgba(1,99,152,0.5)" }}
+            >
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -105,12 +156,20 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-sm text-slate-500 hover:text-blue-400
-                    flex items-center gap-2.5 group transition-all duration-200"
+                    className="text-sm flex items-center gap-2.5 transition-all duration-200"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#7dd3fc";
+                      e.currentTarget.querySelector("span").style.background = "#016398";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                      e.currentTarget.querySelector("span").style.background = "rgba(1,99,152,0.3)";
+                    }}
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-blue-900
-                      group-hover:bg-blue-500 flex-shrink-0 transition-colors"
+                      className="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"
+                      style={{ background: "rgba(1,99,152,0.3)" }}
                     />
                     {item.label}
                   </Link>
@@ -121,60 +180,56 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[2.5px] uppercase
-              text-slate-300 mb-5 pb-3 border-b-2 border-blue-600/40">
+            <h4
+              className="text-[11px] font-bold tracking-[2.5px] uppercase mb-5 pb-3"
+              style={{ color: "#7dd3fc", borderBottom: "2px solid rgba(1,99,152,0.5)" }}
+            >
               Contact
             </h4>
 
             <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 flex items-center justify-center
-                  bg-blue-900/10 border border-blue-900/20 rounded-xl">
-                  📞
+              {[
+                { icon: "📞", label: "Phone", value: "+91 63064 59872" },
+                { icon: "✉️", label: "Email", value: "webnifysolutions@gmail.com" },
+                { icon: "📍", label: "Location", value: "India" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-start gap-3">
+                  <div
+                    className="w-9 h-9 flex items-center justify-center rounded-xl flex-shrink-0"
+                    style={{ background: "rgba(1,99,152,0.12)", border: "1px solid rgba(1,99,152,0.2)" }}
+                  >
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase mb-0.5" style={{ color: "rgba(255,255,255,0.25)" }}>
+                      {item.label}
+                    </p>
+                    <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{item.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[10px] text-slate-600 font-semibold uppercase">
-                    Phone
-                  </p>
-                  <p className="text-sm text-slate-400">+91 63064 59872</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 flex items-center justify-center
-                  bg-blue-900/10 border border-blue-900/20 rounded-xl">
-                  ✉️
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-600 font-semibold uppercase">
-                    Email
-                  </p>
-                  <p className="text-sm text-slate-400">
-                    webnifysolutions@gmail.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 flex items-center justify-center
-                  bg-blue-900/10 border border-blue-900/20 rounded-xl">
-                  📍
-                </div>
-                <div>
-                  <p className="text-[10px] text-slate-600 font-semibold uppercase">
-                    Location
-                  </p>
-                  <p className="text-sm text-slate-400">India</p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <Link
               href="/contact-us"
-              className="mt-6 flex items-center justify-center gap-2 w-full
-              py-3 bg-blue-900/15 hover:bg-blue-900/25 border border-blue-700/25
-              hover:border-blue-500/45 rounded-xl text-sm font-semibold
-              text-blue-400 hover:text-blue-300 transition-all duration-300"
+              className="mt-6 flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+              style={{
+                background: "rgba(1,99,152,0.12)",
+                border: "1px solid rgba(1,99,152,0.3)",
+                color: "#7dd3fc",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#016398";
+                e.currentTarget.style.borderColor = "#016398";
+                e.currentTarget.style.color = "white";
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(1,99,152,0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(1,99,152,0.12)";
+                e.currentTarget.style.borderColor = "rgba(1,99,152,0.3)";
+                e.currentTarget.style.color = "#7dd3fc";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             >
               Get a Free Quote →
             </Link>
@@ -182,13 +237,13 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="border-t border-blue-900/10 pt-6 flex flex-col sm:flex-row
-          items-center justify-between gap-3">
-          <p className="text-xs text-slate-600 text-center sm:text-left">
+        <div
+          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderTop: "1px solid rgba(1,99,152,0.12)" }}
+        >
+          <p className="text-xs text-center sm:text-left" style={{ color: "rgba(255,255,255,0.25)" }}>
             © 2026{" "}
-            <span className="text-blue-500 font-semibold">
-              Webnify Solutions
-            </span>
+            <span className="font-semibold" style={{ color: "#016398" }}>Webnify Solutions</span>
             . All Rights Reserved.
           </p>
 
@@ -201,13 +256,17 @@ export default function Footer() {
               <Link
                 key={l.label}
                 href={l.href}
-                className="text-xs text-slate-600 hover:text-blue-400 transition-colors"
+                className="text-xs transition-colors"
+                style={{ color: "rgba(255,255,255,0.25)" }}
+                onMouseEnter={(e) => e.currentTarget.style.color = "#7dd3fc"}
+                onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.25)"}
               >
                 {l.label}
               </Link>
             ))}
           </div>
         </div>
+
       </div>
     </footer>
   );
