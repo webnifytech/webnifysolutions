@@ -189,7 +189,7 @@ export default function Footer() {
 
             <div className="space-y-4">
               {[
-                { icon: "📞", label: "Phone", value: "+91 63064 59872" },
+                { icon: "📞", label: "Phone", value: "+91 91511 08805" },
                 { icon: "✉️", label: "Email", value: "webnifysolutions@gmail.com" },
                 { icon: "📍", label: "Location", value: "India" },
               ].map((item) => (
