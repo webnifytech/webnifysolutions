@@ -453,7 +453,8 @@ export default function ContactPage() {
               <form ref={formRef} onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <Field label="Full Name">
-                    <input type="text" className={inputClass} />
+                    <input type="text" className={inputClass}
+                      placeholder="Enter your full name" />
                     {errors.name && (
                       <p className="text-red-400 text-xs">{errors.name}</p>
                     )}
@@ -469,7 +470,8 @@ export default function ContactPage() {
                   </Field>
 
                   <Field label="Phone Number">
-                    <input type="tel" className={inputClass} />
+                    <input type="tel" className={inputClass}
+                      placeholder="Enter your phone number" />
                     {errors.phone && (
                       <p className="text-red-400 text-xs">{errors.phone}</p>
                     )}
@@ -488,31 +490,33 @@ export default function ContactPage() {
                     </select>
                   </Field>
 
-               <Field
-  label={`Message ${charCount > 0 ? `· ${charCount}/1000` : ""}`}
-  className="md:col-span-2"
->
-  <textarea
-    placeholder="Tell us about your project, goals, and timeline…"
-    rows={5}
-    required
-    maxLength={1000}
-    onChange={(e) => {
-      setCharCount(e.target.value.length);
+                  <Field
+                    label={`Message ${charCount > 0 ? `· ${charCount}/1000` : ""}`}
+                    className="md:col-span-2"
+                  >
+                    <textarea
+                      placeholder="Tell us about your project, goals, and timeline…"
+                      rows={5}
+                      required
+                      maxLength={1000}
+                      onChange={(e) => {
+                        setCharCount(e.target.value.length);
 
-      // error remove while typing
-      if (errors.message) {
-        setErrors({ ...errors, message: "" });
-      }
-    }}
-    className={`${inputClass} resize-none`}
-  />
+                        // error remove while typing
+                        if (errors.message) {
+                          setErrors({ ...errors, message: "" });
+                        }
+                      }}
+                      className={`${inputClass} resize-none`}
+                    />
 
-  {/* ✅ ERROR MESSAGE */}
-  {errors.message && (
-    <p className="text-red-400 text-xs mt-1">{errors.message}</p>
-  )}
-</Field>
+                    {/* ✅ ERROR MESSAGE */}
+                    {errors.message && (
+                      <p className="text-red-400 text-xs mt-1">
+                        {errors.message}
+                      </p>
+                    )}
+                  </Field>
 
                   <div className="md:col-span-2 mt-1">
                     <button
