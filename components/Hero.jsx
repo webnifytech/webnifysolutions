@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import PopupTrigger from "@/components/PopupTrigger";
 
 /* ─── Brand Colors ──────────────────────────────────────── */
 // Primary: #016398  Secondary: #f97316 (orange accent)  Dark bg: #0b1526
@@ -231,32 +232,12 @@ const services = [
     features: ["Ad Creative Design", "A/B Testing", "ROI Tracking"],
   },
   {
-    icon: <Icon.Mobile />,
-    title: "Mobile App Development",
-    href: "/services/mobile-app",
-    desc: "Native and cross-platform mobile apps that deliver seamless experiences on iOS & Android.",
-    tags: ["React Native", "Flutter", "iOS/Android"],
-    features: ["UI/UX Design", "API Integration", "App Store Launch"],
-  },
-  {
     icon: <Icon.Design />,
     title: "UI/UX Design",
     href: "/services/ui-ux-design",
     desc: "Beautiful, conversion-focused designs that users love and businesses profit from.",
     tags: ["Figma", "Prototyping", "User Research"],
     features: ["Wireframing", "Design System", "Usability Testing"],
-  },
-  {
-    icon: <Icon.Brand />,
-    title: "Brand Identity",
-    href: "/services/branding",
-    desc: "Memorable brand identities that communicate your values and stand out in any market.",
-    tags: ["Logo Design", "Style Guide", "Brand Strategy"],
-    features: [
-      "Logo & Visual Identity",
-      "Brand Guidelines",
-      "Marketing Assets",
-    ],
   },
 ];
 
@@ -319,22 +300,43 @@ const process = [
 
 const testimonials = [
   {
-    name: "Rahul Sharma",
-    role: "Founder, TechStart India",
+    name: "Gajendra Singh",
+    role: "Founder, Koop India",
     rating: 5,
-    text: "Webnify transformed our online presence completely. Our leads increased by 3x within 2 months of launching the new website.",
+    text: "Webnify transformed our online presence completely. Their expert consultation and strategic approach helped us establish a strong digital footprint right from launch.",
   },
   {
-    name: "Priya Mehta",
-    role: "Marketing Head, EduLearn",
+    name: "Neha Sharma",
+    role: "Digital Marketing Manager, Rishikesh Herbs Natural",
     rating: 5,
-    text: "The SEO work they did is phenomenal. We went from page 5 to page 1 for our main keywords in just 90 days.",
+    text: "The SEO and digital marketing work they did is phenomenal. We saw a massive increase in organic traffic and sales for our Ayurvedic products within just 90 days.",
   },
   {
-    name: "Arjun Kapoor",
-    role: "CEO, RetailNow",
+    name: "Anubhav",
+    role: "Creator, AI Expense Tracker",
     rating: 5,
-    text: "Professional, transparent, and genuinely invested in our success. The best IT partner we have worked with.",
+    text: "Professional, highly skilled, and genuinely invested in the product's success. The UI/UX design and development support was top-notch.",
+  },
+];
+
+const ourWork = [
+  {
+    title: "Koop India",
+    desc: "Business Launchpad for Startups & Entrepreneurs. Expert consultation and end-to-end support for registration, compliance, and growth.",
+    url: "https://www.koopindia.com",
+    tag: "Business Consulting",
+  },
+  {
+    title: "Rishikesh Herbs Natural",
+    desc: "Ayurvedic Sugar Care Products. Scientifically blended herbs to support healthy glucose metabolism and overall vitality.",
+    url: "https://rishikeshherbsnatural.com",
+    tag: "E-Commerce",
+  },
+  {
+    title: "AI Powered Expense Tracker",
+    desc: "An intelligent, AI-powered expense tracking application to manage finances efficiently.",
+    url: "https://expensetrackeranu.vercel.app/",
+    tag: "Web App",
   },
 ];
 
@@ -447,36 +449,49 @@ function FAQItem({ faq }) {
 function ServiceCard({ service }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <Link href={service.href} className="block h-full">
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="relative flex flex-col h-full rounded-2xl p-7 border transition-all duration-300 overflow-hidden"
-        style={{
-          background: service.popular
-            ? "linear-gradient(135deg, #016398 0%, #0284c7 100%)"
-            : hovered
-              ? "#f0f9ff"
-              : "white",
-          borderColor: service.popular
-            ? "#016398"
-            : hovered
-              ? "#016398"
-              : "#e2e8f0",
-          transform: hovered ? "translateY(-6px)" : "none",
-          boxShadow: hovered
-            ? service.popular
-              ? "0 20px 60px rgba(1,99,152,0.35)"
-              : "0 20px 60px rgba(1,99,152,0.12)"
-            : service.popular
-              ? "0 8px 32px rgba(1,99,152,0.25)"
-              : "0 1px 3px rgba(0,0,0,0.06)",
-        }}
-      >
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col h-full rounded-2xl border transition-all duration-300 overflow-hidden"
+      style={{
+        background: service.popular
+          ? "linear-gradient(135deg, #016398 0%, #0284c7 100%)"
+          : "white",
+        borderColor: service.popular
+          ? "#016398"
+          : hovered ? "#016398" : "#e2e8f0",
+        transform: hovered ? "translateY(-6px)" : "none",
+        boxShadow: hovered
+          ? service.popular
+            ? "0 24px 64px rgba(1,99,152,0.35)"
+            : "0 24px 64px rgba(1,99,152,0.15)"
+          : service.popular
+            ? "0 8px 32px rgba(1,99,152,0.25)"
+            : "0 2px 8px rgba(0,0,0,0.05)",
+      }}
+    >
+      {/* Top accent bar */}
+      {!service.popular && (
+        <div style={{
+          height: 3,
+          background: hovered
+            ? "linear-gradient(90deg, #016398, #0ea5e9)"
+            : "linear-gradient(90deg, #e2e8f0, #e2e8f0)",
+          transition: "background 0.3s",
+        }} />
+      )}
+
+      <div style={{ padding: "28px 28px 24px" }}>
         {service.popular && (
           <span
-            className="absolute top-4 right-4 text-[10px] font-bold tracking-widest uppercase
-            bg-white/20 text-white px-3 py-1 rounded-full border border-white/30"
+            style={{
+              position: "absolute", top: 16, right: 16,
+              fontSize: 10, fontWeight: 700, letterSpacing: 2,
+              textTransform: "uppercase",
+              background: "rgba(255,255,255,0.2)",
+              color: "white", padding: "3px 10px",
+              borderRadius: 999, border: "1px solid rgba(255,255,255,0.3)",
+            }}
           >
             Most Popular
           </span>
@@ -484,89 +499,98 @@ function ServiceCard({ service }) {
 
         {/* Icon Box */}
         <div
-          className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300"
           style={{
+            width: 52, height: 52, borderRadius: 14,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            marginBottom: 18,
             background: service.popular
               ? "rgba(255,255,255,0.2)"
-              : hovered
-                ? "#016398"
-                : "#eff6ff",
+              : hovered ? "#016398" : "#eff6ff",
             color: service.popular || hovered ? "white" : "#016398",
+            border: service.popular
+              ? "1px solid rgba(255,255,255,0.3)"
+              : hovered ? "1px solid #016398" : "1px solid #bfdbfe",
+            transition: "all 0.3s",
           }}
         >
           {service.icon}
         </div>
 
-        <h3
-          className={`text-[17px] font-bold mb-2.5 ${service.popular ? "text-white" : "text-slate-800"}`}
-        >
+        <h3 style={{
+          fontSize: 17, fontWeight: 800, marginBottom: 8,
+          color: service.popular ? "white" : "#0f172a",
+        }}>
           {service.title}
         </h3>
-        <p
-          className={`text-sm mb-5 flex-grow leading-relaxed ${service.popular ? "text-blue-100" : "text-slate-500"}`}
-        >
+        <p style={{
+          fontSize: 13.5, lineHeight: 1.7, marginBottom: 18, flexGrow: 1,
+          color: service.popular ? "rgba(255,255,255,0.82)" : "#64748b",
+        }}>
           {service.desc}
         </p>
 
-        <ul className="space-y-2 mb-5">
+        <ul style={{ marginBottom: 18 }}>
           {service.features.map((f) => (
-            <li key={f} className="flex items-center gap-2.5 text-[12.5px]">
-              <span
-                className="w-[18px] h-[18px] rounded-full flex items-center justify-center flex-shrink-0"
-                style={{
-                  background: service.popular
-                    ? "rgba(255,255,255,0.2)"
-                    : "#eff6ff",
-                  color: service.popular ? "white" : "#016398",
-                  border: service.popular
-                    ? "1px solid rgba(255,255,255,0.3)"
-                    : "1px solid #bfdbfe",
-                }}
-              >
+            <li key={f} style={{
+              display: "flex", alignItems: "center", gap: 8,
+              fontSize: 12.5, marginBottom: 7,
+            }}>
+              <span style={{
+                width: 18, height: 18, borderRadius: "50%",
+                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                background: service.popular ? "rgba(255,255,255,0.2)" : "#eff6ff",
+                color: service.popular ? "white" : "#016398",
+                border: service.popular ? "1px solid rgba(255,255,255,0.3)" : "1px solid #bfdbfe",
+              }}>
                 <Icon.Check />
               </span>
-              <span
-                className={service.popular ? "text-blue-100" : "text-slate-500"}
-              >
-                {f}
-              </span>
+              <span style={{ color: service.popular ? "rgba(255,255,255,0.85)" : "#475569" }}>{f}</span>
             </li>
           ))}
         </ul>
 
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
           {service.tags.map((t) => (
-            <span
-              key={t}
-              className="text-[11px] px-2.5 py-0.5 rounded-full"
-              style={{
-                background: service.popular
-                  ? "rgba(255,255,255,0.15)"
-                  : "#eff6ff",
-                color: service.popular ? "white" : "#016398",
-                border: service.popular
-                  ? "1px solid rgba(255,255,255,0.25)"
-                  : "1px solid #bfdbfe",
-              }}
-            >
-              {t}
-            </span>
+            <span key={t} style={{
+              fontSize: 11, padding: "3px 10px", borderRadius: 999,
+              background: service.popular ? "rgba(255,255,255,0.15)" : "#f0f9ff",
+              color: service.popular ? "white" : "#016398",
+              border: service.popular ? "1px solid rgba(255,255,255,0.25)" : "1px solid #bae6fd",
+              fontWeight: 600,
+            }}>{t}</span>
           ))}
         </div>
 
-        <div
-          className="flex items-center gap-2 text-sm font-semibold mt-auto"
-          style={{ color: service.popular ? "white" : "#016398" }}
-        >
-          Learn More
-          <span
-            className={`transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`}
+        {/* Two action buttons */}
+        <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
+          <Link
+            href={service.href}
+            style={{
+              flex: 1, padding: "9px 0", borderRadius: 9, textAlign: "center",
+              fontSize: 12, fontWeight: 700, textDecoration: "none",
+              background: service.popular ? "rgba(255,255,255,0.15)" : "#f0f9ff",
+              color: service.popular ? "white" : "#016398",
+              border: service.popular ? "1px solid rgba(255,255,255,0.3)" : "1px solid #bae6fd",
+              transition: "all 0.2s",
+            }}
           >
-            <Icon.Arrow />
-          </span>
+            Learn More
+          </Link>
+          <PopupTrigger
+            style={{
+              flex: 1, padding: "9px 0", borderRadius: 9, textAlign: "center",
+              fontSize: 12, fontWeight: 700, cursor: "pointer",
+              background: service.popular ? "white" : "#016398",
+              color: service.popular ? "#016398" : "white",
+              border: "none",
+              transition: "all 0.2s",
+            }}
+          >
+            Get Quote
+          </PopupTrigger>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -664,8 +688,7 @@ export default function WebnifyLanding() {
               >
                 Explore Solutions →
               </Link>
-              <Link
-                href="/contact-us"
+              <PopupTrigger
                 className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: "transparent",
@@ -673,8 +696,8 @@ export default function WebnifyLanding() {
                   border: "1.5px solid #f97316",
                 }}
               >
-                Get Started →
-              </Link>
+                Get Free Quote →
+              </PopupTrigger>
             </div>
 
             {/* Trust Stats Strip */}
@@ -1056,7 +1079,7 @@ export default function WebnifyLanding() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((s, i) => (
               <ServiceCard key={i} service={s} />
             ))}
@@ -1074,8 +1097,7 @@ export default function WebnifyLanding() {
             >
               View All Services
             </Link>
-            <Link
-              href="/contact-us"
+            <PopupTrigger
               className="px-8 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: "white",
@@ -1084,7 +1106,7 @@ export default function WebnifyLanding() {
               }}
             >
               Book Free Consultation →
-            </Link>
+            </PopupTrigger>
           </div>
         </div>
       </section>
@@ -1357,6 +1379,62 @@ export default function WebnifyLanding() {
         </div>
       </section>
 
+      <section className="py-14 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <span
+              className="inline-block text-[11px] font-bold tracking-[3px] uppercase px-4 py-1.5 rounded-full mb-5"
+              style={{
+                color: "#016398",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+              }}
+            >
+              Our Work
+            </span>
+            <h2 className="text-[clamp(26px,4vw,42px)] font-extrabold text-slate-800 mb-3">
+              Projects We're Proud Of
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {ourWork.map((work, i) => (
+              <a
+                key={i}
+                href={work.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group block relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                style={{
+                  background: "white",
+                  border: "1px solid #e2e8f0",
+                  textDecoration: "none",
+                }}
+              >
+                <div style={{ height: 180, background: "linear-gradient(135deg, #016398 0%, #0ea5e9 100%)", position: "relative" }}>
+                   <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
+                     <Icon.Code />
+                   </div>
+                   <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/30">
+                     {work.tag}
+                   </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-xl text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                    {work.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                    {work.desc}
+                  </p>
+                  <div className="text-blue-600 font-semibold text-sm flex items-center gap-1">
+                    Visit Website <Icon.Arrow />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section
         className="py-14"
         style={{
@@ -1530,8 +1608,7 @@ export default function WebnifyLanding() {
             results for your business.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-16">
-            <a
-              href="/contact-us"
+            <PopupTrigger
               className="flex items-center gap-2 px-10 py-4 rounded-xl font-semibold text-sm transition-all hover:-translate-y-1"
               style={{
                 background: "#016398",
@@ -1540,8 +1617,8 @@ export default function WebnifyLanding() {
               }}
             >
               Get Free Consultation
-            </a>
-            <a
+            </PopupTrigger>
+            <Link
               href="/services"
               className="flex items-center gap-2 px-10 py-4 rounded-xl font-semibold text-sm transition-all hover:-translate-y-1"
               style={{
@@ -1551,23 +1628,24 @@ export default function WebnifyLanding() {
               }}
             >
               Explore Services →
-            </a>
+            </Link>
           </div>
 
           {/* Contact Info */}
           <div className="flex flex-wrap justify-center gap-8">
             {[
-              { icon: <Icon.Mail />, label: "hello@webnify.in" },
-              { icon: <Icon.Phone />, label: "+91 98765 43210" },
+              { icon: <Icon.Mail />, label: "webnifysolutions@gmail.com", href: "mailto:webnifysolutions@gmail.com" },
+              { icon: <Icon.Phone />, label: "+91 9151108805", href: "tel:+919151108805" },
             ].map((c, i) => (
-              <div
+              <a
                 key={i}
+                href={c.href}
                 className="flex items-center gap-2"
-                style={{ color: "rgba(255,255,255,0.5)" }}
+                style={{ color: "rgba(255,255,255,0.6)", textDecoration: "none" }}
               >
                 <span style={{ color: "#016398" }}>{c.icon}</span>
                 <span className="text-sm">{c.label}</span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
