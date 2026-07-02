@@ -297,7 +297,7 @@ export default function PopupForm() {
           {/* ── RIGHT SIDE ── */}
           <div className="popup-right">
             <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>c
                 <h3 style={{ fontSize: 22, fontWeight: 800, color: "#0f172a" }}>Get Free Consultation</h3>
                 <button
                   onClick={handleClose}
