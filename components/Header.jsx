@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import PopupTrigger from "@/components/PopupTrigger";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -13,11 +14,8 @@ const navLinks = [
       { icon: "🎨", label: "UI/UX Design", href: "/services/ui-ux-design", desc: "Beautiful, user-first design" },
       { icon: "📈", label: "SEO Optimization", href: "/services/seo-optimization", desc: "Rank higher on Google" },
       { icon: "📣", label: "Social Media Marketing", href: "/services/social-media-marketing", desc: "Grow your brand online" },
-      { icon: "📱", label: "Mobile App Development", href: "/services/mobile-app", desc: "iOS & Android apps" },
-      { icon: "🏷️", label: "Brand Identity", href: "/services/branding", desc: "Logos & brand guidelines" },
     ],
   },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact", href: "/contact-us" },
 ];
 
@@ -40,7 +38,7 @@ export default function Header() {
 
   return (
     <>
-      {/* ══ DESKTOP HEADER (white) ══ */}
+      {/* HEADER */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
@@ -155,9 +153,8 @@ export default function Header() {
 
             {/* DESKTOP CTA */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link
-                href="/contact-us"
-                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5"
+              <PopupTrigger
+                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                 style={{ background: "#016398", color: "white", boxShadow: "0 4px 16px rgba(1,99,152,0.3)" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "#0284c7";
@@ -169,7 +166,7 @@ export default function Header() {
                 }}
               >
                 Get Free Quote
-              </Link>
+              </PopupTrigger>
             </div>
 
             {/* MOBILE HAMBURGER */}
@@ -187,8 +184,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* ══ MOBILE MENU — UNCHANGED ══ */}
-
       {/* Backdrop */}
       <div
         onClick={() => setMenuOpen(false)}
@@ -201,7 +196,7 @@ export default function Header() {
         }}
       />
 
-      {/* Slide-in Panel */}
+      {/* Mobile Menu */}
       <div
         className="fixed top-0 left-0 bottom-0 z-[70] lg:hidden flex flex-col"
         style={{

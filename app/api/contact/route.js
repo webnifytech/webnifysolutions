@@ -19,7 +19,7 @@ export async function POST(req) {
       to: [
         "anubhavshakya543@gmail.com",
         "webnifysolutions@gmail.com",
-      ], // ✅ BOTH EMAILS
+      ],
       subject: "New Enquiry from Contact Form - Webnify Solutions",
       html: `
         <h2>New Enquiry</h2>

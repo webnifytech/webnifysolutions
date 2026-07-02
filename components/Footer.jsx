@@ -1,7 +1,31 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
+import PopupTrigger from "@/components/PopupTrigger";
 
 export default function Footer() {
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value.trim();
+    if (!email) return;
+    setLoading(true);
+    setMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Newsletter Subscriber", email, phone: "N/A", service: "Newsletter", message: "User subscribed to newsletter." }),
+      });
+      const data = await res.json();
+      if (data.success) { setMsg("success"); e.target.reset(); }
+      else setMsg("error");
+    } catch { setMsg("error"); }
+    setLoading(false);
+  };
+
   return (
     <footer style={{ background: "#060e1a", borderTop: "1px solid rgba(1,99,152,0.15)" }}>
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
@@ -31,16 +55,20 @@ export default function Footer() {
             </p>
 
             {/* Newsletter */}
-            <div
+            <form
+              onSubmit={handleSubscribe}
               className="rounded-xl p-4 mb-6"
               style={{ background: "rgba(1,99,152,0.08)", border: "1px solid rgba(1,99,152,0.2)" }}
             >
-              <p className="text-xs text-slate-400 font-medium mb-3">
-                📬 Get updates in your inbox
+              <p className="text-xs text-slate-400 font-medium mb-3 flex items-center justify-between">
+                <span>📬 Get updates in your inbox</span>
+                {msg === "success" && <span className="text-emerald-400">Subscribed!</span>}
+                {msg === "error" && <span className="text-red-400">Failed</span>}
               </p>
               <div className="flex gap-2">
                 <input
                   type="email"
+                  required
                   placeholder="your@email.com"
                   className="flex-1 rounded-lg px-3 py-2 text-xs text-slate-300 placeholder-slate-600 outline-none transition-colors"
                   style={{
@@ -51,15 +79,17 @@ export default function Footer() {
                   onBlur={(e) => e.target.style.borderColor = "rgba(1,99,152,0.25)"}
                 />
                 <button
+                  type="submit"
+                  disabled={loading}
                   className="text-white text-xs font-semibold px-3 py-2 rounded-lg transition-all hover:-translate-y-0.5"
-                  style={{ background: "#016398" }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = "#0284c7"}
-                  onMouseLeave={(e) => e.currentTarget.style.background = "#016398"}
+                  style={{ background: loading ? "#475569" : "#016398", cursor: loading ? "not-allowed" : "pointer" }}
+                  onMouseEnter={(e) => { if (!loading) e.currentTarget.style.background = "#0284c7"; }}
+                  onMouseLeave={(e) => { if (!loading) e.currentTarget.style.background = "#016398"; }}
                 >
-                  Join
+                  {loading ? "..." : "Join"}
                 </button>
               </div>
-            </div>
+            </form>
 
             {/* Socials */}
             <div className="flex gap-2">
