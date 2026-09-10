@@ -324,7 +324,7 @@ export default function PopupForm() {
                     <label style={{ fontSize: 12, fontWeight: 600, color: "#475569", display: "block", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.5px" }}>Full Name *</label>
                     <input
                       type="text"
-                      placeholder="Enter your full name"
+                      placeholder="Enter your name"
                       value={form.name}
                       onChange={e => { setForm({ ...form, name: e.target.value }); setErrors({ ...errors, name: "" }); }}
                       className={`popup-input${errors.name ? " err" : ""}`}
