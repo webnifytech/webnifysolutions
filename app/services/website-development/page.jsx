@@ -337,7 +337,7 @@ export default function WebDevelopmentServicePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { name: "Gajendra Singh", role: "Founder, Koop India", review: "Webnify transformed our online presence. Their custom website development Noida team delivered a flawless platform." },
-                { name: "Neha Sharma", role: "Marketing Manager", review: "The best website development company Delhi! Our SEO friendly website ranks perfectly on Google." },
+                { name: "Rishabh Singh", role: "Marketing Manager", review: "The best website development company Delhi! Our SEO friendly website ranks perfectly on Google." },
                 { name: "Anubhav", role: "Creator, AI Expense Tracker", review: "Outstanding React development company. The web application is lightning fast and highly responsive." }
               ].map(t => (
                 <div key={t.name} className="p-6 rounded-2xl bg-[#080c18] border border-blue-900/30">
